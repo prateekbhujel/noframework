@@ -2,6 +2,9 @@
 
 use App\Core\App;
 use Spatie\Ignition\Ignition;
+use League\Container\Container;
+
+
 
 require '../vendor/autoload.php';
 
@@ -15,7 +18,17 @@ Ignition::make()->register();
 // Setup
 
 
+$container = new Container();
 
+$container->add('name', function(){
+    
+    return 'Pratik';
+
+});
+
+var_dump($container->get('name'));
+
+die();
 
 $app = new App();
 
