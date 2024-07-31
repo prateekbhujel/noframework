@@ -1,44 +1,14 @@
 <?php
 
-use App\Core\App;
-use Spatie\Ignition\Ignition;
+use App\Providers\AppServiceProvider;
 use League\Container\Container;
-
-
-
-require '../vendor/autoload.php';
-
 
 error_reporting(0);
 
-
-Ignition::make()->register();
-
-
-// Setup
-
+require '../vendor/autoload.php';
 
 $container = new Container();
-
-$container->add('name', function(){
-    
-    return 'Pratik';
-
-});
+$container->addServiceProvider(new AppServiceProvider());
 
 var_dump($container->get('name'));
-
 die();
-
-$app = new App();
-
-
-
-// register routes 
-
-
-
-
-
-$app->run();
-
