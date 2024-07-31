@@ -12,3 +12,6 @@ $container->addServiceProvider(new AppServiceProvider());
 
 var_dump($container->get('name'));
 die();
+ 
+
+// Episode : 7 up next (6 Completed)
