@@ -7,7 +7,9 @@ class App
 
     public function run()
     {
-        // Just run our application.
+        // var_dump($this->name);
+
+        var_dump('run app');
     }
 
 
