@@ -3,7 +3,6 @@
 use App\Config\Config;
 use App\Core\App;
 use App\Core\Container;
-use App\Providers\AppServiceProvider;
 use App\Providers\ConfigServiceProvider;
 use League\Container\ReflectionContainer;
 
@@ -15,16 +14,22 @@ require '../vendor/autoload.php';
 
 
 $container = Container::getInstance();
+
 $container->delegate(new ReflectionContainer() );
-$container->addServiceProvider(new AppServiceProvider());
+
 $container->addServiceProvider(new ConfigServiceProvider());
 
-var_dump($container->get(Config::class)->get('app.name'));
+$config = $container->get(Config::class);
 
-die();
+
+foreach($config->get('app.providers') as $provider)
+{
+    $container->addServiceProvider(new $provider());
+    
+}
+
 
 $app = new App();
-
 
 
 // register routes
