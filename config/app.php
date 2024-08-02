@@ -2,11 +2,15 @@
 
 use App\Providers\AppServiceProvider;
 
+
+
+
 return [
 
 
-    'name' => 'No Framework',
+    'name' => env('APP_NAME'),
 
+    'debug' => env('APP_DEBUG'),
 
     'providers' => [
 
