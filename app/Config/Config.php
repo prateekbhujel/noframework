@@ -4,19 +4,19 @@ namespace App\Config;
 
 
 
-
-
 class Config
 {
 
-    protected array $config = [
+    protected array $config = [];
 
-        'app' => [
 
-            'name' => 'No Framework'
-        ]
+    public function merge(array $config)
+    {
+        $this->config = array_merge_recursive($this->config, $config);
 
-    ];
+        return $this;
+
+    }
 
     public function get(string $key, $default = null) // app.name
     {
