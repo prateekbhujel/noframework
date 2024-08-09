@@ -2,6 +2,7 @@
 
 use App\Providers\AppServiceProvider;
 use App\Providers\RequestServiceProvider;
+use App\Providers\RouteServiceProvider;
 
 return [
 
@@ -14,7 +15,7 @@ return [
 
         AppServiceProvider::class,
         RequestServiceProvider::class,
-        
+        RouteServiceProvider::class,
     ]
 
 ];
