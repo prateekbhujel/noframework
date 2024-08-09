@@ -3,10 +3,9 @@
 namespace App\Providers;
 
 use App\Config\Config;
-use App\Core\Example;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use League\Container\ServiceProvider\BootableServiceProviderInterface;
-use Spatie\Ignition\Ignition;
+
 
 class ConfigServiceProvider extends AbstractServiceProvider implements BootableServiceProviderInterface
 {
@@ -23,7 +22,8 @@ class ConfigServiceProvider extends AbstractServiceProvider implements BootableS
 
             return $this->mergeConfigFromFiles($config);
 
-        });
+        })
+        ->setShared(true);
     }
 
     protected function mergeConfigFromFiles(Config $config)

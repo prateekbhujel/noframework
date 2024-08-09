@@ -1,9 +1,7 @@
 <?php
 
 use App\Providers\AppServiceProvider;
-
-
-
+use App\Providers\RequestServiceProvider;
 
 return [
 
@@ -15,6 +13,7 @@ return [
     'providers' => [
 
         AppServiceProvider::class,
+        RequestServiceProvider::class,
         
     ]
 
