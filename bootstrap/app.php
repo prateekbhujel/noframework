@@ -5,7 +5,6 @@ use App\Core\App;
 use App\Core\Container;
 use App\Providers\ConfigServiceProvider;
 use Dotenv\Dotenv;
-use Laminas\Diactoros\Response;
 use League\Container\ReflectionContainer;
 
 
@@ -36,20 +35,9 @@ foreach($config->get('app.providers') as $provider)
 }
 
 
-
-
 $app = new App($container);
 
-$app->getRouter()->get('/', function() {
-
-    $response = new Response();
-
-    $response->getBody()->write('<center><h1>Home</h1></center>');
-
-    return $response;
-
-});
-
+(require ('../routes/web.php'))($app->getRouter(), $container);
 
 
 $app->run();
