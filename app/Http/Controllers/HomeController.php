@@ -29,7 +29,13 @@ class HomeController
 
            $this->view->render('home.twig', [
 
-                'name' => $this->config->get('app.name')
+                'name' => $this->config->get('app.name'),
+                'users' => [
+                    
+                    ['id' => 1, 'name' => 'Pratik'],
+
+                    ['id' =>2, 'name' => 'Mary']
+                ]
 
            ])
             
