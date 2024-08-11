@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Config\Config;
+use App\Views\TwigExtension;
+use App\Views\TwigRunTimeLoader;
 use App\Views\View;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use League\Container\ServiceProvider\BootableServiceProviderInterface;
@@ -34,6 +36,10 @@ class ViewServiceProvider extends AbstractServiceProvider implements BootableSer
                 'debug' =>$debug,
 
             ]);
+            
+            $twig->addRuntimeLoader(new TwigRunTimeLoader($this->getContainer()));
+
+            $twig->addExtension(new TwigExtension());
 
             $twig->addExtension(new DebugExtension());
 
