@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Config\Config;
+use App\Models\User;
 use App\Views\View;
-use Illuminate\Database\DatabaseManager;
 use Laminas\Diactoros\Response;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -16,7 +16,6 @@ class HomeController
 
         protected Config $config,
         protected View $view,
-        protected DatabaseManager $database,
 
     ) { }
 
@@ -24,7 +23,7 @@ class HomeController
     
     public function __invoke(ServerRequestInterface $request)
     {
-        
+       
         $response = new Response();
 
         $response->getBody()->write(
@@ -32,7 +31,7 @@ class HomeController
            $this->view->render('home.twig', [
 
                 'name' => $this->config->get('app.name'),
-                'users' => $this->database->table('users')->get(),
+                'users' => User::get(),
            ])
             
         );
