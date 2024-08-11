@@ -15,20 +15,23 @@ class HomeController
 
         protected Config $config,
         protected View $view
+
     ) { }
 
     
     
     public function __invoke(ServerRequestInterface $request)
     {
-        var_dump($this->view);
-        die();
-
+        
         $response = new Response();
 
         $response->getBody()->write(
 
-            ''
+           $this->view->render('home.twig', [
+
+                'name' => $this->config->get('app.name')
+
+           ])
             
         );
 
