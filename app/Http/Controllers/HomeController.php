@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Config\Config;
 use App\Views\View;
+use Illuminate\Database\DatabaseManager;
 use Laminas\Diactoros\Response;
 use Psr\Http\Message\ServerRequestInterface;
 
@@ -14,7 +15,8 @@ class HomeController
     public function __construct(
 
         protected Config $config,
-        protected View $view
+        protected View $view,
+        protected DatabaseManager $database,
 
     ) { }
 
@@ -30,13 +32,7 @@ class HomeController
            $this->view->render('home.twig', [
 
                 'name' => $this->config->get('app.name'),
-                'users' => [
-                    
-                    ['id' => 1, 'name' => 'Pratik'],
-
-                    ['id' =>2, 'name' => 'Mary']
-                ]
-
+                'users' => $this->database->table('users')->get(),
            ])
             
         );
