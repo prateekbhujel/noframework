@@ -7,7 +7,7 @@ use Cartalyst\Sentinel\Sentinel;
 use Laminas\Diactoros\Response;
 use Psr\Http\Message\ServerRequestInterface;
 
-class RegisterController 
+class LoginController 
 {
 
     
@@ -26,7 +26,7 @@ class RegisterController
 
         $response->getBody()->write(
 
-           $this->view->render('auth/register.twig')
+           $this->view->render('auth/login.twig')
             
         );
 
@@ -37,10 +37,11 @@ class RegisterController
 
     public function store(ServerRequestInterface $request) 
     {
-        if($user = $this->auth->registerAndActivate($request->getParsedBody()))
-        {
-            
-            $this->auth->login($user);
+        if($this->auth->authenticate($request->getParsedBody()))
+        {    
+            // Flash message
+
+            return new Response\RedirectResponse('/login');
 
         }
 
