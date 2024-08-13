@@ -4,6 +4,7 @@
 namespace App\Views;
 
 use App\Config\Config;
+use Cartalyst\Sentinel\Sentinel;
 use Psr\Container\ContainerInterface;
 use Twig\Extension\AbstractExtension;
 
@@ -20,6 +21,12 @@ class TwigRunTimeExtension extends AbstractExtension
    {
 
         return $this->container->get(Config::class);
+
+   }
+
+   public function auth() : Sentinel
+   {
+     return $this->container->get(Sentinel::class);
 
    }
 

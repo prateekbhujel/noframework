@@ -3,22 +3,18 @@
 namespace App\Models;
 
 
-use Illuminate\Database\Eloquent\Model;
+use Cartalyst\Sentinel\Users\EloquentUser;
 
 
-
-
-class User extends Model
+class User extends EloquentUser
 {
 
     protected $table = 'users';
 
-    // protected $guarded = false;
+    protected $guarded = ['id'];
 
-    protected $fillable = [
-
-        'name', 
-        
-    ];
+    // protected $fillable = [
+    //     'first_name', 
+    // ];
 
 }
