@@ -10,6 +10,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
 
 return static function(Router $router, ContainerInterface $container) {
+    
+    $router->middleware($container->get('csrf'));
 
     $router->get('/',HomeController::class);
 
