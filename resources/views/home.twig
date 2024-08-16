@@ -7,6 +7,10 @@
 
     <h1>{{ name }}</h1>
 
+    {% if message is defined  %}
+        {{ message[0] }}
+    {% endif %}
+    
     <div>
 
     {% for user in users %}
