@@ -9,6 +9,9 @@
 
         <li> 
             <form action="/logout" method="POST">
+
+            {{ csrf() | raw }}
+            
                 <button type="submit"> Log out </button>
             </form>
         </li>

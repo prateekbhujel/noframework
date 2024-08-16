@@ -30,4 +30,17 @@ class TwigRunTimeExtension extends AbstractExtension
 
    }
 
+   public function csrf(): string
+   {
+      $guard = $this->container->get('csrf');
+      
+
+      return '
+              <input type="hidden" name="' . $guard->getTokenNameKey()  . '" value="' . $guard->getTokenName()  . '" />
+              <input type="hidden" name="' . $guard->getTokenvalueKey() . '" value="' . $guard->getTokenvalue() . '" />
+
+      ';
+
+   }
+
 }
