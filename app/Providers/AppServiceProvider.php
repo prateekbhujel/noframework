@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Config\Config;
 use League\Container\ServiceProvider\AbstractServiceProvider;
 use League\Container\ServiceProvider\BootableServiceProviderInterface;
+use Respect\Validation\Factory;
 use Spatie\Ignition\Ignition;
 
 class AppServiceProvider extends AbstractServiceProvider implements BootableServiceProviderInterface
@@ -16,6 +17,13 @@ class AppServiceProvider extends AbstractServiceProvider implements BootableServ
 
             Ignition::make()->register();
         }
+
+        Factory::setDefaultInstance(
+            (new Factory())
+                ->withRuleNamespace('App\\Validation\\Rules')
+                ->withExceptionNamespace('App\\Validation\\Exceptions')
+        );
+
     }
 
 
