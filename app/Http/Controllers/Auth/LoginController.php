@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Config\Config;
 use App\Views\View;
 use Cartalyst\Sentinel\Sentinel;
-use Laminas\Diactoros\Request;
 use Laminas\Diactoros\Response;
 use Psr\Http\Message\ServerRequestInterface;
 use Respect\Validation\Exceptions\ValidatorException;
@@ -20,7 +18,7 @@ class LoginController
         protected Session $session,
     ) {}
 
-    public function index(ServerRequestInterface $request)
+    public function index()
     {
         $response = new Response();
 
@@ -36,17 +34,27 @@ class LoginController
     public function store(ServerRequestInterface $request)
     {
         try {
+
             v::key('email', v::email()->notEmpty())
                 ->key('password', v::notEmpty())
                 ->assert($request->getParsedBody());
+
         } catch (ValidatorException $e) {
+
             $this->session->getFlashBag()->add('errors', $e->getMessages());
+
             return new Response\RedirectResponse('/login');
+
         }
 
         if (!$this->auth->authenticate($request->getParsedBody())) {
-            // flash message
+
+            $this->session->getFlashBag()->add('errors', [
+                'email' => 'Could not log you in with those details. '
+            ]);
+
             return new Response\RedirectResponse('/login');
+
         }
 
         return new Response\RedirectResponse('/dashboard');
