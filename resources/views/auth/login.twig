@@ -1,31 +1,52 @@
 {% extends 'layouts/app.twig' %}
 
-{% block title %} Login {% endblock %}
+{% block title %}Login{% endblock %}
 
 {% block content %}
     
-
     <h1>Login</h1>
     
     <form action="/login" method="post">
         
         {{ csrf() | raw }}
-
-        <div>
         
-            <label for="email"> Email
-                <input type="text" id="email" name="email" required/>
-            </label>
+        <div>
             
-            <label for="password"> Password
-                <input type="password" id="password" name="password" required/>
-            </label>
+            <label for="email">Email</label>
             
-            <button type="submit">Login</button>
+            <input type="text" id="email" name="email">
+            
+            {% if errors.email %}
+                
+                <div style="color:red; margin-top:4px; margin-bottom:8px;">
+                    
+                    {{ errors.email }}
 
+                </div>
+            
+            {% endif %}
+        
         </div>
 
+        <div>
+            
+            <label for="password">Password</label>
+            
+            <input type="password" id="password" name="password">
+            
+            {% if errors.email %}
+                
+                <div style="color:red; margin-top:4px; margin-bottom:8px;">
+                    
+                    {{ errors.email }}
+
+                </div>
+            
+            {% endif %}
         
+        </div>
+
+        <button type="submit">Login</button>
 
     </form>
 

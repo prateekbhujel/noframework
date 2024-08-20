@@ -4,7 +4,6 @@
 
 {% block content %}
     
-
     <h1>Register</h1>
     
     <form action="/register" method="post">
@@ -12,23 +11,27 @@
         {{ csrf() | raw }}
 
         <div>
-            <label for="first_name"> Name
-                <input type="text" id="first_name" name="first_name" required/>
-            </label>
+            <div>
+                <label for="first_name"> Name
+                    <input type="text" id="first_name" name="first_name" required/>
+                </label>
+            </div>
+            
+            <div>
+                <label for="email"> Email
+                    <input type="text" id="email" name="email" required/>
+                </label>
+            </div>
 
-            <label for="email"> Email
-                <input type="text" id="email" name="email" required/>
-            </label>
-            
-            <label for="password"> Password
-                <input type="password" id="password" name="password" required/>
-            </label>
-            
+            <div>
+                <label for="password"> Password
+                    <input type="password" id="password" name="password" required/>
+                </label>
+            </div>
+
             <button type="submit">Register</button>
 
         </div>
-
-        
 
     </form>
 
