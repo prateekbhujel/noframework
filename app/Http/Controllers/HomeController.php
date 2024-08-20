@@ -7,7 +7,6 @@ use App\Models\User;
 use App\Views\View;
 use Laminas\Diactoros\Response;
 use Psr\Http\Message\ServerRequestInterface;
-use Symfony\Component\HttpFoundation\Session\Session;
 
 class HomeController 
 {
@@ -17,8 +16,6 @@ class HomeController
 
         protected Config $config,
         protected View $view,
-        protected Session $session,
-
     ) { }
 
     
@@ -34,7 +31,6 @@ class HomeController
 
                 'name' => $this->config->get('app.name'),
                 'users' => User::get(),
-                'message' => $this->session->getFlashBag()->get('message'),
            ])
             
         );

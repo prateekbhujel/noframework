@@ -15,6 +15,7 @@ class TwigExtension extends AbstractExtension
             new TwigFunction('config', [TwigRunTimeExtension::class, 'config']),
             new TwigFunction('auth', [TwigRunTimeExtension::class, 'auth']),
             new TwigFunction('csrf', [TwigRunTimeExtension::class, 'csrf']),
+            new TwigFunction('session', [TwigRunTimeExtension::class, 'session']),
 
         ];
 
