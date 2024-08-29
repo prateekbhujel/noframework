@@ -8,6 +8,7 @@ use Psr\Container\ContainerInterface;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\ExampleMiddleware;
 
 return static function(Router $router, ContainerInterface $container) {
     
@@ -17,7 +18,8 @@ return static function(Router $router, ContainerInterface $container) {
 
 
 
-    $router->get('/dashboard',DashboardController::class);
+    $router->get('/dashboard',DashboardController::class)
+        ->middleware(new ExampleMiddleware());
     
     
 
