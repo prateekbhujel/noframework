@@ -1,6 +1,4 @@
 <?php
-
-
 namespace App\Http\Middleware;
 
 use Psr\Http\Message\ServerRequestInterface;
@@ -12,13 +10,7 @@ class ExampleMiddleware implements MiddlewareInterface
 {
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-    {
-
-        //do something
-
-        
+    {   // do something
       return $handler->handle($request);
-
     }
-
 }

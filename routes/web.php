@@ -8,37 +8,32 @@ use Psr\Container\ContainerInterface;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
-use App\Http\Middleware\ExampleMiddleware;
+use App\Http\Middleware\RedirectIfAuthenticated;
+use App\Http\Middleware\RedirectIfGuest;
+use League\Route\RouteGroup;
 
-return static function(Router $router, ContainerInterface $container) {
-    
+return static function(Router $router, ContainerInterface $container)
+{
     $router->middleware($container->get('csrf'));
 
     $router->get('/',HomeController::class);
 
+    $router->group('/', function(RouteGroup $route) {
 
-
-    $router->get('/dashboard',DashboardController::class)
-        ->middleware(new ExampleMiddleware());
-    
-    
-
-    $router->get('/register',[RegisterController::class, 'index']);
-
-    $router->post('/register',[RegisterController::class, 'store']);
-    
-
-    
-    $router->get('/login',[LoginController::class, 'index']);
-    
-    $router->post('/login',[LoginController::class, 'store']);
-
-
-
-    $router->post('/logout', LogoutController::class);
-
-    
+        $route->get('/register',[RegisterController::class, 'index']);
+        $route->post('/register',[RegisterController::class, 'store']);
+        $route->get('/login',[LoginController::class, 'index']);
+        $route->post('/login',[LoginController::class, 'store']);
+        
+    })
+        ->middleware(new RedirectIfAuthenticated());
+    $router->group('/', function(RouteGroup $route) {
+        
+        $route->get('/dashboard', DashboardController::class);
+        $route->post('/logout', LogoutController::class);
+    })
+        ->middleware(new RedirectIfGuest());
 
     $router->get('/users/{user}',UserController::class);
-    
+
 };
