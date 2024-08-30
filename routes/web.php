@@ -8,6 +8,7 @@ use Psr\Container\ContainerInterface;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UserController;
+use App\Http\Middleware\FlashOldDataMiddleware;
 use App\Http\Middleware\RedirectIfAuthenticated;
 use App\Http\Middleware\RedirectIfGuest;
 use League\Route\RouteGroup;
@@ -15,6 +16,7 @@ use League\Route\RouteGroup;
 return static function(Router $router, ContainerInterface $container)
 {
     $router->middleware($container->get('csrf'));
+    $router->middleware(new FlashOldDataMiddleware());
 
     $router->get('/',HomeController::class);
 
@@ -28,9 +30,8 @@ return static function(Router $router, ContainerInterface $container)
     })
         ->middleware(new RedirectIfAuthenticated());
     $router->group('/', function(RouteGroup $route) {
-        
         $route->get('/dashboard', DashboardController::class);
-        $route->post('/logout', LogoutController::class);
+        $route->get('/logout', LogoutController::class);
     })
         ->middleware(new RedirectIfGuest());
 
