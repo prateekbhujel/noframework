@@ -10,6 +10,10 @@ class View
     
     public function __construct(protected Environment $twig) {}
 
+    public function exists(string $view)
+    {
+        return $this->twig->getLoader()->exists($view);
+    }
 
     public function render(string $view, array $data = []): string
     {

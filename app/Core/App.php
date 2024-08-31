@@ -32,16 +32,14 @@ class App
     public function run()
     {
         $response = new Response();
-
-        try{
-            
+        
+        try
+        {
             $response = $this->router->dispatch($this->request);
-
         } catch( \Throwable $e) 
         {
-            $this->container->get(ExceptionHandler::class)
-                    ->handle($this->request, $response, $e);
-
+            $response = $this->container->get(ExceptionHandler::class)
+                                ->handle($this->request, $response, $e);
         }
 
         (new SapiEmitter())->emit($response);
