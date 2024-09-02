@@ -2,22 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
-
 use Cartalyst\Sentinel\Sentinel;
 use Laminas\Diactoros\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class LogoutController 
+final class LogoutController 
 {
-
-    
     public function __construct(
         protected Sentinel $auth,
         protected Session $session
-
     ) { }
-
-    
     
     public function __invoke()
     {

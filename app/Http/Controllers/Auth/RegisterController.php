@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Views\View;
 use Cartalyst\Sentinel\Sentinel;
 use Laminas\Diactoros\Response;
 use Psr\Http\Message\ServerRequestInterface;
@@ -10,25 +9,18 @@ use Respect\Validation\Exceptions\ValidatorException;
 use Respect\Validation\Validator as v;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class RegisterController 
+final class RegisterController 
 {
     public function __construct(
-        protected View $view,
         protected Sentinel $auth,
-        protected Session $session,
+        protected Session $session
     ) { }
 
     public function index()
     {
-        $response = new Response();
-
-        $response->getBody()->write(
-           $this->view->render('auth/register.twig', [
+        return view('auth/register.twig', [
             'errors' => $this->session->getFlashBag()->get('errors')[0] ?? null
-           ])
-        );
-        return $response;
-        
+        ]);
     }
     
     public function store(ServerRequestInterface $request) 
@@ -46,8 +38,7 @@ class RegisterController
         {
             $this->auth->login($user);
         }
-
+        
         return new Response\RedirectResponse('/dashboard');
     }
-    
 }
