@@ -1,0 +1,103 @@
+{# These are the custom styles feel free to change (generated from ChatGPT.) #}
+<style>
+  .pagination-container {
+    display: inline-flex;
+    justify-content: center; /* Centers pagination */
+    margin: 20px 0; /* Adds spacing above and below pagination */
+    }
+
+    .pagination-list {
+        display: flex;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .pagination-item {
+        margin: 0 2px;
+    }
+
+    .pagination-item a,
+    .pagination-item span {
+        display: block;
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        text-decoration: none;
+        color: #333;
+        background-color: #fff;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .pagination-item a:hover {
+        background-color: #f0f0f0;
+    }
+
+    .pagination-item.active span {
+        background-color: #007bff;
+        color: #fff;
+        border-color: #007bff;
+    }
+
+    .pagination-arrow {
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #fff;
+        color: #333;
+        text-decoration: none;
+        transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .pagination-arrow:hover {
+        background-color: #f0f0f0;
+    }
+
+    .pagination-arrow.disabled {
+        color: #bbb;
+        background-color: #f9f9f9;
+        cursor: not-allowed;
+    }
+</style>
+
+{% if paginator.hasPages() %}
+    <nav class="pagination-container">
+        <ul class="pagination-list">
+            {% if paginator.onFirstPage() %}
+                <li>
+                    <span class="pagination-arrow disabled">&lsaquo;</span>
+                </li>
+            {% else %}
+                <li>
+                    <a href="{{ paginator.previousPageUrl() }}" class="pagination-arrow">&lsaquo;</a>
+                </li>
+            {% endif %}
+
+            {% for element in elements %}
+                {% if element is not iterable %}
+                    <li><span class="pagination-item">{{ element }}</span></li>
+                {% endif %}
+
+                {% if element is iterable %}
+                    {% for page, url in element %}
+                        {% if page == paginator.currentPage() %}
+                            <li class="pagination-item active"><span>{{ page }}</span></li>
+                        {% else %}
+                            <li class="pagination-item"><a href="{{ url }}">{{ page }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+
+            {% if paginator.hasMorePages() %}
+                <li>
+                    <a href="{{ paginator.nextPageUrl() }}" class="pagination-arrow">&rsaquo;</a>
+                </li>
+            {% else %}
+                <li>
+                    <span class="pagination-arrow disabled">&rsaquo;</span>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+{% endif %}
