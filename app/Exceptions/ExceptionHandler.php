@@ -8,10 +8,8 @@ use Psr\Http\Message\ServerRequestInterface;
 
 final class ExceptionHandler
 {
-    public function __construct(protected View $view)
-    {
-        
-    }
+    public function __construct(protected View $view) {    }
+    
     public function handle(ServerRequestInterface $request, ResponseInterface $response, \Throwable $e)
     {
         if ($view = $this->getErrorView($e))
