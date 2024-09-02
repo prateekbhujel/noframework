@@ -40,4 +40,8 @@ class TwigRunTimeExtension extends AbstractExtension
       ';
    }
    
+   public function route(string $name, array $arguments = []): string
+   {
+      return route($name, $arguments);
+   }
 }

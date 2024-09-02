@@ -4,9 +4,10 @@
 
 {% block content %}
 
-    <h1>{{ user.name }}</h1>
-    <div>
-        Some details about the user.
+    <h1>{{ user.first_name }}</h1>
+     <hr>
+    <div style="text-decoration: underline; font-size: 28px; margin-bottom: 50px;"> 
+        <em> Email:</em> <i style="font-weight: bold; color: green;">{{ user.email }}</i>
     </div>
     
 {% endblock %}

@@ -4,7 +4,6 @@ use App\Config\Config;
 use App\Core\Container;
 use App\Views\View;
 use Laminas\Diactoros\Response;
-use League\Route\Route;
 use League\Route\Router;
 
 /*
@@ -37,7 +36,12 @@ function view(string $view, array $data = []): Response
     return $response;
 }
 
-function config(string $key, $default = null): string
+function config(string $key, $default = null): string|array
 {
     return app(Config::class)->get($key, $default);
+}
+
+function route(string $name, array $arguments = []): string|array
+{
+    return app(Router::class)->getNamedRoute($name)->getPath($arguments);
 }

@@ -15,7 +15,7 @@ final class HomeController
     {   
        return view('home.twig', [
             'name'  => $this->config->get('app.name'),
-            'users' => User::paginate(10)
+            'users' => User::paginate(5)
        ]);
     }
 
