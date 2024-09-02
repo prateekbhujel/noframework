@@ -1,12 +1,8 @@
 <?php
 
-
 namespace App\Validation\Exceptions;
 
-
 use Respect\Validation\Exceptions\ValidationException;
-
-
 
 class ExistsInDatabaseException extends ValidationException
 {
@@ -19,6 +15,5 @@ class ExistsInDatabaseException extends ValidationException
             self::STANDARD => 'That already exists in the database.',
         ]
     ];
-
 
 }

@@ -10,11 +10,11 @@ use Twig\Extension\AbstractExtension;
 
 class TwigRunTimeExtension extends AbstractExtension
 {
-    public function __construct(protected ContainerInterface $container) {}
+    public function __construct(protected ContainerInterface $container) { }
    
     public function config(): Config
    {
-        return $this->container->get(Config::class);
+        return app(Config::class);
    }
     public function old(string $key)
    {
@@ -23,17 +23,17 @@ class TwigRunTimeExtension extends AbstractExtension
 
    public function auth() : Sentinel
    {
-     return $this->container->get(Sentinel::class);
+     return app(Sentinel::class);
    }
 
    public function session() 
    {
-     return $this->container->get(Session::class);
+     return app(Session::class);
    }
 
    public function csrf(): string
    {
-      $guard = $this->container->get('csrf');
+      $guard = app('csrf');
       return '
               <input type="hidden" name="' . $guard->getTokenNameKey()  . '" value="' . $guard->getTokenName()  . '" />
               <input type="hidden" name="' . $guard->getTokenvalueKey() . '" value="' . $guard->getTokenvalue() . '" />

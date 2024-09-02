@@ -21,20 +21,17 @@ return static function(Router $router, ContainerInterface $container)
     $router->get('/',HomeController::class);
 
     $router->group('/', function(RouteGroup $route) {
-
         $route->get('/register',[RegisterController::class, 'index']);
         $route->post('/register',[RegisterController::class, 'store']);
         $route->get('/login',[LoginController::class, 'index']);
         $route->post('/login',[LoginController::class, 'store']);
         
-    })
-        ->middleware(new RedirectIfAuthenticated());
+    })->middleware(new RedirectIfAuthenticated());
+
     $router->group('/', function(RouteGroup $route) {
         $route->get('/dashboard', DashboardController::class);
-        $route->get('/logout', LogoutController::class);
-    })
-        ->middleware(new RedirectIfGuest());
+        $route->post('/logout', LogoutController::class);
+    })->middleware(new RedirectIfGuest());
 
     $router->get('/users/{user}',UserController::class);
-
 };

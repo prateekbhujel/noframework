@@ -22,6 +22,7 @@ final class ExceptionHandler
 
     protected function getErrorView(\Throwable $e)
     {
+        dump('here');
         if (!method_exists($e, 'getStatusCode')){
             return null;
         }

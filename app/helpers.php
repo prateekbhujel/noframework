@@ -1,8 +1,12 @@
 <?php
 
+use App\Core\Container;
+
+
+
 /*
 |--------------------------------------------------------------------------
-| Helper Functions
+|                           Helper Functions
 |--------------------------------------------------------------------------
 |
 | Here is where you can define your global helper functions. These functions
@@ -14,7 +18,8 @@
 |
 */
 
-function name()
+
+function app(string $abstract): object
 {
- return "Pratik";
+    return Container::getInstance()->get($abstract);
 }

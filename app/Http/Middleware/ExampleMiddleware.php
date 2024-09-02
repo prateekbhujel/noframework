@@ -8,9 +8,9 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class ExampleMiddleware implements MiddlewareInterface
 {
-
+  
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
-    {   // do something
+    {
       return $handler->handle($request);
     }
 }

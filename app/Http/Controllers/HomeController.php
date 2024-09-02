@@ -16,9 +16,6 @@ class HomeController
     
     public function __invoke()
     {   
-        dump(name());
-        die();
-
         $response = new Response();
 
         $response->getBody()->write(

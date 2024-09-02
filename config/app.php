@@ -9,15 +9,10 @@ use App\Providers\RouteServiceProvider;
 use App\Providers\SessionServiceProvider;
 use App\Providers\ViewServiceProvider;
 
-
 return [
-
     'name' => env('APP_NAME'),
-
     'debug' => env('APP_DEBUG'),
-
     'providers' => [
-
         AppServiceProvider::class,
         RequestServiceProvider::class,
         RouteServiceProvider::class,
@@ -27,5 +22,4 @@ return [
         CsrfServiceProvider::class,
         SessionServiceProvider::class,
     ]
-
 ];
