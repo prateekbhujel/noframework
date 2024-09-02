@@ -16,12 +16,15 @@ class HomeController
     
     public function __invoke()
     {   
+        dump(name());
+        die();
+
         $response = new Response();
 
         $response->getBody()->write(
            $this->view->render('home.twig', [
                 'name' => $this->config->get('app.name'),
-                'users' => User::paginate(1),
+                'users' => User::paginate(10),
            ])
         );
 
