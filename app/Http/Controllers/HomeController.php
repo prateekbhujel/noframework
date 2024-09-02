@@ -6,38 +6,26 @@ use App\Config\Config;
 use App\Models\User;
 use App\Views\View;
 use Laminas\Diactoros\Response;
-use Psr\Http\Message\ServerRequestInterface;
 
 class HomeController 
 {
-
-    
     public function __construct(
-
         protected Config $config,
         protected View $view,
     ) { }
-
     
-    
-    public function __invoke(ServerRequestInterface $request)
-    {
-
+    public function __invoke()
+    {   
         $response = new Response();
 
         $response->getBody()->write(
-
            $this->view->render('home.twig', [
-
                 'name' => $this->config->get('app.name'),
-                'users' => User::get(),
+                'users' => User::paginate(1),
            ])
-            
         );
 
         return $response;
-        
     }
-    
 
 }
